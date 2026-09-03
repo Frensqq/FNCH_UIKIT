@@ -59,6 +59,6 @@ fun defaultFNCHTypography(): FNCHTypography{
             20
         )
     )
-
-    val FNCHType = defaultFNCHTypography()
 }
+
+val FNCHType = defaultFNCHTypography()
