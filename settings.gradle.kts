@@ -24,4 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FNCH_UIKIT"
 include(":app")
- 
+include(":UiKit")
