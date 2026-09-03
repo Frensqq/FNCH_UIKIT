@@ -1,6 +1,7 @@
 package com.example.uikit.UI
 
-import android.graphics.Color
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
 
 data class FNCHColor(
@@ -17,5 +18,12 @@ data class FNCHColor(
 val defaultFNCHColor = FNCHColor(
     primary = Color(0xff004AC6),
     secondary = Color(0xff505F76),
-
+    tertiary = Color(0xff943700),
+    error = Color(0xffBA1A1A),
+    white = Color(0xffFFFFFF),
+    black = Color(0xff000000),
+    grey = Color(0xffC3C6D7),
+    darkenWhite = Color(0xffFAF8FF)
 )
+
+val LocalFNCHColor = staticCompositionLocalOf { defaultFNCHColor }
