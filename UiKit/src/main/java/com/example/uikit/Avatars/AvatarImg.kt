@@ -87,6 +87,8 @@ fun testAvatarImg(){
             "Photo"
         )
 
+        AvatarText("JD" , "initials")
+
     }
 
 }
