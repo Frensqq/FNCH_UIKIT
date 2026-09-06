@@ -35,6 +35,7 @@ import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
 import com.example.uikit.UI.SpacerH
+import com.example.uikit.UI.SpacerW
 
 @Composable
 fun InputFields(
@@ -95,7 +96,7 @@ fun InputFields(
                 )
                 .border(
                     border = BorderStroke(
-                        width = 1.dp,
+                        width = Dimensions.SmallBorderStroke,
                         color = borderColor
                     ),
                     shape = shape
@@ -122,7 +123,7 @@ fun InputFields(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(
-                            horizontal = 16.dp
+                            horizontal = Dimensions.ExtraMediumPadding
                         ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -137,9 +138,7 @@ fun InputFields(
                             tint = FNCHTheme.colors.secondary
                         )
 
-                        Box(
-                            modifier = Modifier.size(12.dp)
-                        )
+                        SpacerW(Dimensions.MediumSpacer)
                     }
 
                     Box(
@@ -160,9 +159,7 @@ fun InputFields(
 
                     if (isPass) {
 
-                        Box(
-                            modifier = Modifier.size(12.dp)
-                        )
+                        SpacerW(Dimensions.MediumSpacer)
 
                         Icon(
                             painter = painterResource(
