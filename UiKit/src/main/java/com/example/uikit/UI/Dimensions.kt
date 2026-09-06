@@ -19,6 +19,7 @@ object Dimensions {
 
 
     //Button
+    val SmallObjectHeight = 8.dp
     val HeightButton = 48.dp
 
     //
@@ -34,6 +35,8 @@ object Dimensions {
 
     val MediumAlpha = 0.5f
     val LargeAlpha = 1f
+
+    val defaultWeight = 1f
 
     val SmallBorderStroke = 1.dp
     val MediumBorderStroke = 2.dp
