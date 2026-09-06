@@ -12,9 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +31,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -38,81 +38,51 @@ import com.example.uikit.UI.SpacerH
 import com.example.uikit.UI.SpacerW
 
 @Composable
-fun InputFields(
+fun Select(
     onChange: (String) -> Unit,
     placeholder: String,
     value: String,
+    valueList: List<String> = listOf("Engineering","Testing","Development"),
     titleText: String? = null,
-    errorText: String? = null,
-    isSearch: Boolean = false,
-    isPass: Boolean = false,
-    isDisable: Boolean = false,
-) {
-
-    var isFocused by remember { mutableStateOf(false) }
-    var isPasswordVisible by remember { mutableStateOf(false) }
-
-    val shape = RoundedCornerShape(Dimensions.SmallRounded)
-
-    val borderColor = when {
-        !errorText.isNullOrEmpty() -> FNCHTheme.colors.error
-        isFocused -> FNCHTheme.colors.primary
-        else -> FNCHTheme.colors.grey
-    }
-
-    Column {
-
+){
+    var expandMenu by remember{ mutableStateOf(false) }
+    Column() {
         if (!titleText.isNullOrEmpty()) {
 
             Text(
                 text = titleText,
                 style = FNCHTheme.typography.labelMedium,
-                color = when {
-                    !errorText.isNullOrEmpty() -> FNCHTheme.colors.error
-                    isFocused -> FNCHTheme.colors.primary
-                    else -> FNCHTheme.colors.secondary
-                }
+                color = FNCHTheme.colors.secondary
             )
-
             SpacerH(
                 Dimensions.SmallSpacer
             )
         }
 
+
         BasicTextField(
             value = value,
-            onValueChange = {
-                if (!isDisable) {
-                    onChange(it)
-                }
-            },
-
+            onValueChange = {},
+            enabled = false,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(Dimensions.HeightButton)
                 .background(
                     color = FNCHTheme.colors.darkenWhite,
-                    shape = shape
+                    shape = RoundedCornerShape(Dimensions.SmallRounded)
                 )
                 .border(
                     border = BorderStroke(
                         width = Dimensions.SmallBorderStroke,
-                        color = borderColor
+                        color = FNCHTheme.colors.grey
                     ),
-                    shape = shape
-                )
-                .onFocusChanged { focusState ->
-                    isFocused = focusState.isFocused
-                },
-
-            enabled = !isDisable,
+                    shape = RoundedCornerShape(Dimensions.SmallRounded)
+                ),
 
             singleLine = true,
-
             textStyle = FNCHTheme.typography.bodyMedium.copy(
                 color = FNCHTheme.colors.black
             ),
-
             cursorBrush = SolidColor(
                 FNCHTheme.colors.primary
             ),
@@ -128,18 +98,6 @@ fun InputFields(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    if (isSearch) {
-
-                        Icon(
-                            painter = painterResource(
-                                R.drawable.search
-                            ),
-                            contentDescription = null,
-                            tint = FNCHTheme.colors.secondary
-                        )
-
-                        SpacerW(Dimensions.MediumSpacer)
-                    }
 
                     Box(
                         modifier = Modifier.weight(Dimensions.LargeAlpha),
@@ -153,54 +111,50 @@ fun InputFields(
                                 color = FNCHTheme.colors.secondary
                             )
                         }
-
                         innerTextField()
                     }
+                    SpacerW(Dimensions.MediumSpacer)
 
-                    if (isPass) {
+                    Icon(
+                        painter = painterResource(
+                            R.drawable.select
+                        ),
+                        modifier = Modifier.clickable {
+                            expandMenu = true
+                        },
+                        contentDescription = null,
+                        tint = FNCHTheme.colors.secondary
+                    )
 
-                        SpacerW(Dimensions.MediumSpacer)
-
-                        Icon(
-                            painter = painterResource(
-                                R.drawable.open_eye
-                            ),
-                            modifier = Modifier.clickable{
-                                isPasswordVisible = !isPasswordVisible
-                            },
-                            contentDescription = null,
-                            tint = FNCHTheme.colors.secondary
-                        )
-                    }
                 }
-            },
-            visualTransformation = if (isPass && !isPasswordVisible) {
-                PasswordVisualTransformation()
-            } else {
-                VisualTransformation.None
-            },
-
+            }
         )
+        DropdownMenu(
+            expandMenu,
+            onDismissRequest = {
+                expandMenu = false
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            valueList.forEach { item ->
+                DropdownMenuItem(
+                    text = { Text(item) },
+                    onClick = {
+                        onChange(item)
+                        expandMenu = false
+                    }
+                )
+            }
 
-        if (!errorText.isNullOrEmpty()) {
-
-            SpacerH(
-                Dimensions.SmallSpacer
-            )
-
-            Text(
-                text = errorText,
-                style = FNCHTheme.typography.labelMedium,
-                color = FNCHTheme.colors.error
-            )
         }
     }
+
 }
 
 
 @Preview
 @Composable
-fun TestInput() {
+fun TestSelect() {
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -209,40 +163,36 @@ fun TestInput() {
 
         var text by remember { mutableStateOf("") }
 
-        InputFields(
+        Select(
             onChange = {
                 text = it
             },
             placeholder = "place",
             value = text,
             titleText = "test",
-            isSearch = true
         )
 
         SpacerH(
             Dimensions.SmallSpacer
         )
-        InputFields(
+        Select(
             onChange = {
                 text = it
             },
             placeholder = "place",
             value = text,
             titleText = "test",
-            isPass = true
         )
 
         SpacerH(
             Dimensions.SmallSpacer
         )
 
-        InputFields(
+        Select(
             onChange = {},
             placeholder = "",
             value = "value",
-            titleText = "test",
-            errorText = "test error",
-            isSearch = true
+            titleText = "test"
         )
     }
 }
