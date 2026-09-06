@@ -12,7 +12,8 @@ data class FNCHTypography(
     val Subheader: TextStyle,
     val BodyMedium: TextStyle,
     val BodySmall: TextStyle,
-    val FieldLabel: TextStyle
+    val FieldLabel: TextStyle,
+    val DisplaySmall: TextStyle
 )
 
 fun defaultFNCHTypography(): FNCHTypography{
@@ -57,6 +58,11 @@ fun defaultFNCHTypography(): FNCHTypography{
             R.font.semi_bold,
             14,
             20
+        ),
+        DisplaySmall = textStyle(
+            R.font.semi_bold,
+            12,
+            16
         )
     )
 }

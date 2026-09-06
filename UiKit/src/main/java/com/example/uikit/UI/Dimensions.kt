@@ -7,7 +7,9 @@ object Dimensions {
 
 
     //Spacers
-    val SmallSpacer = 4.dp
+    val ExtraSmallSpacer = 4.dp
+    val SmallSpacer = 8.dp
+
     val MediumSpacer = 12.dp
     val ExtraMediumSpacer = 12.dp
 
@@ -20,7 +22,9 @@ object Dimensions {
     val HeightButton = 48.dp
 
     //
-    val MediumObjectSize = 24.dp
+    val SmallObjectSize = 24.dp
+    val LargeObjectSize = 64.dp
+
 
     //Rounded
     val ExtraSmallRounded = 4.dp
@@ -32,4 +36,5 @@ object Dimensions {
     val LargeAlpha = 1f
 
     val SmallBorderStroke = 1.dp
+    val MediumBorderStroke = 2.dp
 }

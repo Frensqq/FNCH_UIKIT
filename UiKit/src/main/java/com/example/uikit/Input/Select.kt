@@ -55,7 +55,7 @@ fun Select(
                 color = FNCHTheme.colors.secondary
             )
             SpacerH(
-                Dimensions.SmallSpacer
+                Dimensions.ExtraSmallSpacer
             )
         }
 
@@ -173,7 +173,7 @@ fun TestSelect() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
         Select(
             onChange = {
@@ -185,7 +185,7 @@ fun TestSelect() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
 
         Select(

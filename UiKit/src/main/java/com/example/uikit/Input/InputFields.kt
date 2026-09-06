@@ -75,7 +75,7 @@ fun InputFields(
             )
 
             SpacerH(
-                Dimensions.SmallSpacer
+                Dimensions.ExtraSmallSpacer
             )
         }
 
@@ -185,7 +185,7 @@ fun InputFields(
         if (!errorText.isNullOrEmpty()) {
 
             SpacerH(
-                Dimensions.SmallSpacer
+                Dimensions.ExtraSmallSpacer
             )
 
             Text(
@@ -220,7 +220,7 @@ fun TestInput() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
         InputFields(
             onChange = {
@@ -233,7 +233,7 @@ fun TestInput() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
 
         InputFields(

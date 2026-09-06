@@ -39,7 +39,7 @@ fun Checkboxes(
     Row() {
         Box(
             Modifier
-                .size(Dimensions.MediumObjectSize)
+                .size(Dimensions.SmallObjectSize)
                 .clip(
                     RoundedCornerShape(
                         Dimensions.ExtraSmallRounded
@@ -53,7 +53,7 @@ fun Checkboxes(
                     }
                 }
                 .border(
-                    width = Dimensions.SmallBorderStroke,
+                    width = Dimensions.MediumBorderStroke,
                     color = if (state) FNCHTheme.colors.primary
                     else{
                         if (isDisabled) FNCHTheme.colors.grey
@@ -112,7 +112,7 @@ fun TestCheck() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
 
         var test2 by remember { mutableStateOf(false) }
@@ -123,7 +123,7 @@ fun TestCheck() {
         )
 
         SpacerH(
-            Dimensions.SmallSpacer
+            Dimensions.ExtraSmallSpacer
         )
 
         var test3 by remember { mutableStateOf(true) }

@@ -46,7 +46,8 @@ private fun createFNCHTypography(): Typography {
         displayMedium = type.ScreenHeader,
         bodyMedium = type.BodyMedium,
         bodySmall = type.BodySmall,
-        labelMedium = type.FieldLabel
+        labelMedium = type.FieldLabel,
+        displaySmall = type.DisplaySmall
     )
 }
 
