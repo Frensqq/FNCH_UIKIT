@@ -6,6 +6,9 @@ object Dimensions {
 
 
 
+    //Spacers
+    val SmallSpacer = 4.dp
+
     //Padding
     val MediumPadding = 14.dp
 
