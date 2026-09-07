@@ -26,6 +26,8 @@ object Dimensions {
 
     val MediumObjectHeight = 64.dp
 
+    val TopBarHeight = 58.dp
+
     //
     val SmallObjectSize = 24.dp
     val MediumObjectSize = 40.dp
