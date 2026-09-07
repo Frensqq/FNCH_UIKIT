@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import com.example.uikit.Input.Checkboxes
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
@@ -31,7 +32,8 @@ import com.example.uikit.UI.SpacerH
 @Composable
 fun AvatarImg(
     painter: Painter? = null,
-    text: String? = null
+    text: String? = null,
+    size: Dp = Dimensions.LargeObjectSize
 ){
 
     Column(
@@ -40,7 +42,7 @@ fun AvatarImg(
     ) {
         Box(
             modifier = Modifier
-                .size(Dimensions.LargeObjectSize)
+                .size(size)
                 .clip(CircleShape)
                 .background(FNCHTheme.colors.darkenWhite)
                 .border(

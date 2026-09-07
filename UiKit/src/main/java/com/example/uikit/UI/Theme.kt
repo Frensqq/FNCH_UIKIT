@@ -43,7 +43,7 @@ private fun createFNCHTypography(): Typography {
 
     return Typography(
         displayLarge = type.ScreenHeader,
-        displayMedium = type.ScreenHeader,
+        displayMedium = type.Subheader,
         bodyMedium = type.BodyMedium,
         bodySmall = type.BodySmall,
         labelMedium = type.FieldLabel,

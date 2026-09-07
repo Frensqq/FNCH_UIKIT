@@ -4,7 +4,9 @@ import androidx.compose.ui.unit.dp
 
 object Dimensions {
 
+    val countLine = 2
 
+    val DefaultSpacer = 20.dp
 
     //Spacers
     val ExtraSmallSpacer = 4.dp
@@ -22,8 +24,11 @@ object Dimensions {
     val SmallObjectHeight = 8.dp
     val HeightButton = 48.dp
 
+    val MediumObjectHeight = 64.dp
+
     //
     val SmallObjectSize = 24.dp
+    val MediumObjectSize = 40.dp
     val LargeObjectSize = 64.dp
 
 
