@@ -4,6 +4,8 @@ import androidx.compose.ui.unit.dp
 
 object Dimensions {
 
+    val ZeroSize = 0.dp
+
     val countLine = 2
 
     val DefaultSpacer = 20.dp
@@ -13,7 +15,9 @@ object Dimensions {
     val SmallSpacer = 8.dp
 
     val MediumSpacer = 12.dp
-    val ExtraMediumSpacer = 12.dp
+    val ExtraMediumSpacer = 14.dp
+
+    val LargeSpacer = 45.dp
 
     //Padding
     val MediumPadding = 14.dp
@@ -24,7 +28,11 @@ object Dimensions {
     val SmallObjectHeight = 8.dp
     val HeightButton = 48.dp
 
+    val BottomBarObjectHeight = 36.dp
+
     val MediumObjectHeight = 64.dp
+
+    val BottomBarHeight = 80.dp
 
     val TopBarHeight = 58.dp
 
@@ -43,8 +51,13 @@ object Dimensions {
     val MediumAlpha = 0.5f
     val LargeAlpha = 1f
 
+    val SmallWeight = 0.05f
     val defaultWeight = 1f
 
     val SmallBorderStroke = 1.dp
     val MediumBorderStroke = 2.dp
+
+
+    val NavBarShadowY= (-4).dp
+    val NavBarShadowR= 12.dp
 }

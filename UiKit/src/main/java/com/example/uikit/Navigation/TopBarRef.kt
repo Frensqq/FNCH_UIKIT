@@ -49,10 +49,10 @@ fun TopBarRef(
                 .dropShadow(
                     shape = RectangleShape,
                     shadow = Shadow(
-                        radius = 2.dp,
-                        spread = 0.dp,
-                        color = FNCHTheme.colors.black.copy(alpha = 0.5f),
-                        offset = DpOffset(x = 0.dp, y = Dimensions.SmallBorderStroke)
+                        radius = Dimensions.MediumBorderStroke,
+                        spread = Dimensions.ZeroSize,
+                        color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
+                        offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.SmallBorderStroke)
                     )
                 )
                 .background(FNCHTheme.colors.white)
