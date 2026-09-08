@@ -24,7 +24,7 @@ object Dimensions {
     val MediumPadding = 14.dp
     val ExtraMediumPadding = 16.dp
 
-    val LargePading = 24.dp
+    val LargePadding = 24.dp
 
 
     //Button
@@ -38,6 +38,7 @@ object Dimensions {
     val BottomBarHeight = 80.dp
 
     val TopBarHeight = 58.dp
+    val SnackBarHeight = 72.dp
 
     //
     val SmallObjectSize = 24.dp
@@ -55,12 +56,23 @@ object Dimensions {
     val LargeAlpha = 1f
 
     val SmallWeight = 0.05f
+    val MediumWeight = 0.1f
     val defaultWeight = 1f
 
+    val MediumFillMax = 0.75f
     val SmallBorderStroke = 1.dp
     val MediumBorderStroke = 2.dp
 
 
     val NavBarShadowY= (-4).dp
+    val SnackBarSmallShadowY= 8.dp
+    val SnackBarMediumShadowY= 20.dp
+    val SnackBarSmallBlur= 10.dp
+    val SnackBarMediumBlur= 25.dp
     val NavBarShadowR= 12.dp
+
+    val SmallSpread = (-5).dp
+    val ExtraSmallSpread = (-6).dp
+
+
 }

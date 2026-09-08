@@ -101,7 +101,7 @@ fun SaveNavBarItem(
                 onClick()
             }
                 .padding(
-                    horizontal = Dimensions.LargePading,
+                    horizontal = Dimensions.LargePadding,
                     vertical = Dimensions.ExtraSmallPadding
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
