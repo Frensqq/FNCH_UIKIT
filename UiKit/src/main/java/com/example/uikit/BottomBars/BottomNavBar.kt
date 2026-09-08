@@ -6,11 +6,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,33 +24,36 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
 import com.example.uikit.UI.SpacerW
 
+
 @Composable
-fun BottomNavBarShell(
-    currentState: String,
-    onChangeState: (String) -> Unit
+fun BottomNavBar(
+    onClickSave: () -> Unit,
+    onClickNext: () -> Unit
 ) {
 
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .height(Dimensions.BottomBarHeight)
             .dropShadow(
                 shape = RoundedCornerShape(
-                    topStart = Dimensions.SmallRounded,
-                    topEnd = Dimensions.SmallRounded),
+                    topStart = Dimensions.LargeRounded,
+                    topEnd = Dimensions.LargeRounded),
                 shadow = Shadow(
                     radius = Dimensions.NavBarShadowR,
                     spread = Dimensions.ZeroSize,
@@ -54,99 +61,108 @@ fun BottomNavBarShell(
                     offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.NavBarShadowY)
                 )
             ).clip(RoundedCornerShape(
-                topStart = Dimensions.SmallRounded,
-                topEnd = Dimensions.SmallRounded)
+                topStart = Dimensions.LargeRounded,
+                topEnd = Dimensions.LargeRounded)
             )
             .background(FNCHTheme.colors.white)
             .border(
                 width = Dimensions.SmallBorderStroke,
                 FNCHTheme.colors.darkenWhite,
                 shape = RoundedCornerShape(
-                    topStart = Dimensions.SmallRounded,
-                    topEnd = Dimensions.SmallRounded)
+                    topStart = Dimensions.LargeRounded,
+                    topEnd = Dimensions.LargeRounded)
             ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {
-        BottomBarShellItem(
-            painterResource(R.drawable.vacancies),
-            "Vacancies",
-            state = currentState == "Vacancies"
-        ) {item->
-            onChangeState(item)
+
+
+        SaveNavBarItem {
+            onClickSave()
         }
-        SpacerW(Dimensions.LargeSpacer)
-        BottomBarShellItem(
-            painterResource(R.drawable.candidates),
-            "Candidates",
-            state = currentState == "Candidates"
-        ) {item->
-            onChangeState(item)
-        }
-        SpacerW(Dimensions.LargeSpacer)
-        BottomBarShellItem(
-            painterResource(R.drawable.settings),
-            "Settings",
-            state = currentState == "Settings"
-        ) {item->
-            onChangeState(item)
+        SpacerW(Dimensions.SmallSpacer)
+        NextNavBarItem {
+            onClickNext()
         }
 
     }
 
 }
+
 
 @Composable
-fun BottomBarShellItem(icon: Painter,text: String, state: Boolean, onClick: (String) -> Unit){
-    Column(
-        Modifier
-            .height(Dimensions.BottomBarObjectHeight)
-            .clickable{
-                onClick(text)
-            },
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
+fun SaveNavBarItem(
+    onClick: ()->Unit
+){
 
-        val color = if (state) FNCHTheme.colors.primary else FNCHTheme.colors.secondary
-
-        Icon(painter = icon,
-            contentDescription = null,
-            tint = color
+    Box() {
+        Column(
+            Modifier.clickable {
+                onClick()
+            }
+                .padding(
+                    horizontal = Dimensions.LargePading,
+                    vertical = Dimensions.ExtraSmallPadding
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.save),
+                contentDescription = null,
+                tint = FNCHTheme.colors.secondary
             )
-        Text(
-            text,
-            style = FNCHTheme.typography.labelMedium,
-            overflow = TextOverflow.Visible,
-            color = color
-        )
 
-
+            Text(
+                "Сохранить",
+                style = FNCHTheme.typography.bodySmall,
+                color = FNCHTheme.colors.secondary
+            )
+        }
     }
 }
+@Composable
+fun NextNavBarItem(
+    onClick: ()->Unit
+){
 
+    Button(
+        onClick = {
+            onClick()
+        },
+        colors = ButtonDefaults.buttonColors(
+            contentColor = FNCHTheme.colors.white,
+            containerColor = FNCHTheme.colors.primary
+        ),
+        shape = RoundedCornerShape(Dimensions.LargeRounded),
+        contentPadding = PaddingValues(
+            horizontal = Dimensions.MediumObjectSize,
+            vertical = Dimensions.SmallSpacer
+        )
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.next),
+                contentDescription = null,
+            )
+            Text(
+                "Продолжить",
+                style = FNCHTheme.typography.bodySmall,
+            )
+        }
+    }
+}
 
 @Preview
 @Composable
-fun testNavBarShell(){
+fun testNavBar(){
     var current by remember { mutableStateOf("Test") }
     Column(
         Modifier.fillMaxSize().background( FNCHTheme.colors.white),
         verticalArrangement = Arrangement.Center) {
-
-        BottomNavBarShell(current) {
-            current = it
-        }
-
+        BottomNavBar({},{})
     }
 
-
-    var text by remember { mutableStateOf("Test") }
-    BottomBarShellItem(
-        painterResource(R.drawable.search),
-        "Product",
-        state = text == "Product",{
-            text = it
-        }
-    )
 }

@@ -20,8 +20,11 @@ object Dimensions {
     val LargeSpacer = 45.dp
 
     //Padding
+    val ExtraSmallPadding = 4.dp
     val MediumPadding = 14.dp
     val ExtraMediumPadding = 16.dp
+
+    val LargePading = 24.dp
 
 
     //Button
