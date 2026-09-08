@@ -37,6 +37,8 @@ object Dimensions {
 
     val BottomBarHeight = 80.dp
 
+    val MinTextAreaHeight = 82.dp
+
     val TopBarHeight = 58.dp
     val SnackBarHeight = 72.dp
 
