@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.dp
 object Dimensions {
 
     val ZeroSize = 0.dp
+    val OneSize = 1.dp
 
     val countLine = 2
 
@@ -47,6 +48,8 @@ object Dimensions {
     val MediumObjectSize = 40.dp
     val LargeObjectSize = 64.dp
 
+    val LargeAvatarSize = 96.dp
+
 
     //Rounded
     val ExtraSmallRounded = 4.dp
@@ -64,11 +67,14 @@ object Dimensions {
     val MediumFillMax = 0.75f
     val SmallBorderStroke = 1.dp
     val MediumBorderStroke = 2.dp
+    val LargeBorderStroke = 4.dp
 
 
     val NavBarShadowY= (-4).dp
     val SnackBarSmallShadowY= 8.dp
     val SnackBarMediumShadowY= 20.dp
+    val AvatarSmallBlur= 2.dp
+    val CardBlur= 12.dp
     val SnackBarSmallBlur= 10.dp
     val SnackBarMediumBlur= 25.dp
     val NavBarShadowR= 12.dp
