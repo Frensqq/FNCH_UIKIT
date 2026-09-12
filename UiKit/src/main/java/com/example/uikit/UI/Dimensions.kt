@@ -26,9 +26,13 @@ object Dimensions {
     val ExtraMediumPadding = 16.dp
 
     val LargePadding = 24.dp
+    val ExtraLargePadding = 32.dp
 
 
     //Button
+
+    val ExtraSmallObjectHeight = 4.dp
+    val ObjectWidth = 32.dp
     val SmallObjectHeight = 8.dp
     val HeightButton = 48.dp
 
@@ -56,6 +60,7 @@ object Dimensions {
     val SmallRounded = 8.dp
     val MediumRounded = 10.dp
     val LargeRounded = 12.dp
+    val ExtraLargeRounded = 16.dp
 
     val MediumAlpha = 0.5f
     val LargeAlpha = 1f
