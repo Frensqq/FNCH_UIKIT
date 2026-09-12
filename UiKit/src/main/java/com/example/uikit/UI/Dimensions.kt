@@ -62,6 +62,8 @@ object Dimensions {
     val LargeRounded = 12.dp
     val ExtraLargeRounded = 16.dp
 
+
+    val SmallAlpha = 0.3f
     val MediumAlpha = 0.5f
     val LargeAlpha = 1f
 
