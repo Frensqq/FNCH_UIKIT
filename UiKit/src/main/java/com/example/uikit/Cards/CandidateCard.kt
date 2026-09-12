@@ -60,7 +60,7 @@ fun CandidateCard(
                 .size(Dimensions.LargeAvatarSize)
                 .clip(CircleShape)
                 .dropShadow(
-                    shape = RoundedCornerShape(Dimensions.SmallRounded),
+                    shape =CircleShape,
                     shadow = Shadow(
                         radius = Dimensions.AvatarSmallBlur,
                         spread = Dimensions.ZeroSize,
@@ -68,10 +68,12 @@ fun CandidateCard(
                         offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.OneSize)
                     )
                 )
-                .border(Dimensions.LargeBorderStroke, FNCHTheme.colors.white, CircleShape)
+                .border(Dimensions.LargeBorderStroke, FNCHTheme.colors.white, CircleShape),
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painter?: painterResource(R.drawable.avatar),
+                modifier = Modifier.fillMaxSize(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
@@ -96,6 +98,7 @@ fun CandidateCard(
 
 }
 
+@Preview
 @Composable
 fun PreviewCandidateCard(){
     Box(modifier = Modifier.fillMaxSize(),
