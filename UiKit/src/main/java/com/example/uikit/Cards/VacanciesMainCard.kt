@@ -147,7 +147,7 @@ fun VacanciesMainCard(
                 Dimensions.SmallBorderStroke
             )
             .background(
-                FNCHTheme.colors.darkenWhite
+                FNCHTheme.colors.grey
             )
         )
 
