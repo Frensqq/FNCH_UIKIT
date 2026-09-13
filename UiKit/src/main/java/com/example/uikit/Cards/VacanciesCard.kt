@@ -39,7 +39,8 @@ fun VacanciesCard(
     state: String,
     countApplication: Int,
     minCost: Int,
-    maxCost: Int
+    maxCost: Int,
+    onClick: () -> Unit
 ){
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -60,6 +61,9 @@ fun VacanciesCard(
                 RoundedCornerShape(Dimensions.LargeRounded)
 
             )
+            .clickable{
+                onClick()
+            }
             .padding(Dimensions.ExtraMediumPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -160,7 +164,9 @@ fun PreviewVacanciesCard(){
             24,
             120,
             160
-        )
+        ){
+
+        }
 
     }
 }

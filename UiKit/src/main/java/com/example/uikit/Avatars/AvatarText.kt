@@ -16,13 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
 
 @Composable
 fun AvatarText(
     title: String? = null,
-    text: String? = null
+    text: String? = null,
+    size: Dp = Dimensions.LargeObjectSize
 ){
 
     Column(
@@ -31,7 +33,7 @@ fun AvatarText(
     ) {
         Box(
             modifier = Modifier
-                .size(Dimensions.LargeObjectSize)
+                .size(size)
                 .clip(CircleShape)
                 .background(FNCHTheme.colors.darkenWhite)
                 .border(
