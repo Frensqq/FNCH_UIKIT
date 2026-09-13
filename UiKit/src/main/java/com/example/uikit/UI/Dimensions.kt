@@ -67,6 +67,7 @@ object Dimensions {
     val MediumAlpha = 0.5f
     val LargeAlpha = 1f
 
+    val ZeroWeight = 0.05f
     val SmallWeight = 0.05f
     val MediumWeight = 0.1f
     val defaultWeight = 1f
@@ -88,6 +89,16 @@ object Dimensions {
 
     val SmallSpread = (-5).dp
     val ExtraSmallSpread = (-6).dp
+
+
+    val defaultAnimateTime = 300
+    val thresholdBottomSheet = 3f
+    val shouldDismissBottomSheet = 1500f
+    val lazyColumnMaxHeight =494.dp
+    val bottomSheetButtonHeight = 113.dp
+
+    val sheetMaxHeight = 680.dp
+
 
 
 }

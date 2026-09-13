@@ -51,6 +51,7 @@ fun SecondaryButton(
     ) {
         Text(
             text = text,
+            softWrap = true,
             style = FNCHTheme.typography.bodyMedium,
         )
     }

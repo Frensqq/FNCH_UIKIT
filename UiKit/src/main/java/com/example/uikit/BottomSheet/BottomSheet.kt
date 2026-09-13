@@ -2,6 +2,7 @@ package com.example.uikit.BottomSheet
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -40,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
@@ -50,13 +53,16 @@ import com.example.uikit.Button.PrimaryButton
 import com.example.uikit.Button.SecondaryButton
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
+import com.example.uikit.UI.SpacerH
 
 @Composable
 fun CustomBottomSheet(
     isOpen: Boolean,
     onDismiss: () -> Unit,
+    listData: List<BottomSheetData>,
+    onChange: (Int, Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    sheetMaxHeight: Dp = 680.dp,
+    sheetMaxHeight: Dp = Dimensions.sheetMaxHeight,
 ) {
     val density = LocalDensity.current
     val screenHeightPx = with(density) {
@@ -64,38 +70,35 @@ fun CustomBottomSheet(
     }
     val maxSheetHeightPx = with(density) { sheetMaxHeight.toPx() }
 
-    // Фактическая высота sheet (может быть меньше sheetMaxHeight)
     var actualSheetHeightPx by remember { mutableFloatStateOf(maxSheetHeightPx) }
 
-    var dragOffsetPx by remember { mutableFloatStateOf(0f) }
+    var dragOffsetPx by remember { mutableFloatStateOf(Dimensions.ZeroWeight) }
 
     LaunchedEffect(isOpen) {
-        if (!isOpen) dragOffsetPx = 0f
+        if (!isOpen) dragOffsetPx = Dimensions.ZeroWeight
     }
 
-    // При закрытии сдвигаем на максимум — гарантированно за экран
-    val baseOffsetPx = if (isOpen) 0f else maxSheetHeightPx
+    val baseOffsetPx = if (isOpen) Dimensions.ZeroWeight else maxSheetHeightPx
     val animatedBase by animateFloatAsState(
         targetValue = baseOffsetPx,
-        animationSpec = tween(durationMillis = 300),
+        animationSpec = tween(durationMillis = Dimensions.defaultAnimateTime),
         label = "sheetBaseOffset"
     )
-    val totalOffsetPx = (animatedBase + dragOffsetPx).coerceAtLeast(0f)
+    val totalOffsetPx = (animatedBase + dragOffsetPx).coerceAtLeast(Dimensions.ZeroWeight)
 
     val scrimAlpha by animateFloatAsState(
-        targetValue = if (isOpen) 1f else 0f,
-        animationSpec = tween(300),
+        targetValue = if (isOpen) Dimensions.defaultWeight else Dimensions.ZeroWeight,
+        animationSpec = tween(Dimensions.defaultAnimateTime),
         label = "scrimAlpha"
     )
 
     Box(modifier = modifier.fillMaxSize()) {
-        // Затемнение фона
-        if (scrimAlpha > 0f) {
+        if (scrimAlpha > Dimensions.ZeroWeight) {
             Box(
                 Modifier
                     .fillMaxSize()
                     .alpha(scrimAlpha)
-                    .background(Color.Black.copy(alpha = 0.5f))
+                    .background(Color.Black.copy(alpha = Dimensions.MediumAlpha))
                     .clickable(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
@@ -107,7 +110,7 @@ fun CustomBottomSheet(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .heightIn(max = sheetMaxHeight)          // адаптивная высота по контенту, максимум 680
+                .heightIn(max = sheetMaxHeight)
                 .offset(y = with(density) { totalOffsetPx.toDp() })
                 .onSizeChanged { actualSheetHeightPx = it.height.toFloat() },
             shape = RoundedCornerShape(
@@ -118,7 +121,7 @@ fun CustomBottomSheet(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()                  // Column по высоте контента
+                    .wrapContentHeight()
             ) {
                 Box(
                     modifier = Modifier
@@ -126,17 +129,17 @@ fun CustomBottomSheet(
                         .draggable(
                             orientation = Orientation.Vertical,
                             state = rememberDraggableState { delta ->
-                                dragOffsetPx = (dragOffsetPx + delta).coerceAtLeast(0f)
+                                dragOffsetPx = (dragOffsetPx + delta).coerceAtLeast(Dimensions.ZeroWeight)
                             },
                             onDragStopped = { velocity ->
-                                val threshold = actualSheetHeightPx / 3f
-                                val shouldDismiss = dragOffsetPx > threshold || velocity > 1500f
+                                val threshold = actualSheetHeightPx / Dimensions.thresholdBottomSheet
+                                val shouldDismiss = dragOffsetPx > threshold || velocity > Dimensions.shouldDismissBottomSheet
 
                                 if (shouldDismiss) {
                                     dragOffsetPx = screenHeightPx
                                     onDismiss()
                                 } else {
-                                    dragOffsetPx = 0f
+                                    dragOffsetPx = Dimensions.ZeroWeight
                                 }
                             }
                         )
@@ -144,7 +147,10 @@ fun CustomBottomSheet(
                     DefaultDragHandle()
                 }
 
-                BottomSheetContent()
+                BottomSheetContent(
+                    listData,
+                    onChange,
+                )
             }
         }
     }
@@ -191,10 +197,11 @@ private fun ItemBottomSheet(
 }
 
 @Composable
-private fun BottomSheetContent() {
+private fun BottomSheetContent(
+    listData: List<BottomSheetData>,
+    onChange: (Int, Boolean) -> Unit,
+) {
     Column {
-        var isCheck by remember { mutableStateOf(true) }
-
         Text(
             "Select Status",
             style = FNCHTheme.typography.displayMedium,
@@ -202,14 +209,20 @@ private fun BottomSheetContent() {
             color = FNCHTheme.colors.black
         )
 
+        SpacerH(Dimensions.ExtraMediumPadding)
+
         LazyColumn(
             modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .heightIn(max = 494.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(horizontal = Dimensions.ExtraMediumPadding)
+                .heightIn(max = Dimensions.lazyColumnMaxHeight),
+            verticalArrangement = Arrangement.spacedBy(Dimensions.ExtraSmallPadding)
         ) {
-            items(10) {
-                ItemBottomSheet("test", isCheck) { isCheck = it }
+            itemsIndexed(listData) { index, item ->
+                ItemBottomSheet(
+                    text = item.text,
+                    isCheck = item.state,
+                    onClick = { newState -> onChange(index, newState) }
+                )
             }
         }
 
@@ -220,14 +233,15 @@ private fun BottomSheetContent() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(113.dp)
-                    .padding(vertical = 32.dp, horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    .height(Dimensions.bottomSheetButtonHeight)
+                    .border(border = BorderStroke( Dimensions.SmallBorderStroke,FNCHTheme.colors.grey ), RectangleShape)
+                    .padding(vertical = Dimensions.ExtraLargePadding, horizontal =  Dimensions.ExtraMediumPadding),
+                horizontalArrangement = Arrangement.spacedBy( Dimensions.ExtraMediumPadding)
             ) {
-                Box(modifier = Modifier.weight(1f)) {
+                Box(modifier = Modifier.weight(Dimensions.defaultWeight)) {
                     SecondaryButton({}, "Отменить")
                 }
-                Box(modifier = Modifier.weight(1f)) {
+                Box(modifier = Modifier.weight(Dimensions.defaultWeight)) {
                     PrimaryButton({}, "Обновить", true)
                 }
             }
@@ -258,16 +272,38 @@ private fun DefaultDragHandle() {
 @Preview(showBackground = true)
 @Composable
 private fun TestSheetPreview() {
-    var isOpen by remember { mutableStateOf(true) }
-
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Button(onClick = { isOpen = true }) {
-            Text("Открыть")
-        }
+    var isOpen by remember { mutableStateOf(false) }
+    var testList by remember {
+        mutableStateOf(
+            listOf(
+                BottomSheetData("В работе", true),
+                BottomSheetData("Завершено", false),
+                BottomSheetData("Отменено", false),
+                BottomSheetData("Черновик", false),
+            )
+        )
     }
 
-    CustomBottomSheet(
-        isOpen = isOpen,
-        onDismiss = { isOpen = false }
-    )
+    Box(modifier = Modifier.fillMaxSize()) {
+
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Button(onClick = { isOpen = true }) {
+                Text("Открыть")
+            }
+        }
+
+        CustomBottomSheet(
+            isOpen = isOpen,
+            onDismiss = { isOpen = false },
+            listData = testList,
+            onChange = { index, newState ->
+                testList = testList.toMutableList().also {
+                    it[index] = it[index].copy(state = newState)
+                }
+            }
+        )
+    }
 }
