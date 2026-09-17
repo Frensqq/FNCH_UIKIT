@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import com.example.uikit.Avatars.UniversalAvatar
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -67,20 +68,14 @@ fun VacanciesMainCard(
 
         Row(horizontalArrangement = Arrangement.spacedBy(Dimensions.ExtraMediumPadding)) {
 
-            Box(
-                Modifier
-                    .size(Dimensions.HeightButton)
-                    .clip(CircleShape)
-                    .background(FNCHTheme.colors.grey),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(avTitle,
-                    style = FNCHTheme.typography.bodyMedium.copy(fontWeight = FontWeight(800)),
-                    modifier = Modifier.padding(Dimensions.MediumSpacer),
-                    color = FNCHTheme.colors.primary
-                    )
-            }
-
+            UniversalAvatar(
+                state = false,
+                title = avTitle,
+                colorText = FNCHTheme.colors.primary,
+                colorBack = FNCHTheme.colors.grey,
+                textStyle = FNCHTheme.typography.bodyMedium.copy(fontWeight = FontWeight(800)),
+                size = Dimensions.HeightButton
+            )
             Column(
                 verticalArrangement = Arrangement.spacedBy(Dimensions.ExtraSmallPadding)
             ) {

@@ -14,15 +14,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
 
+
 @Composable
-fun AvatarText(
+fun UniversalAvatar(
+    painter: Painter? = null,
     title: String? = null,
+    state: Boolean,
+    colorText: Color = FNCHTheme.colors.black,
+    colorBack: Color = FNCHTheme.colors.darkenWhite,
+    textStyle: TextStyle = FNCHTheme.typography.displayLarge,
     text: String? = null,
     size: Dp = Dimensions.LargeObjectSize
 ){
@@ -35,21 +43,32 @@ fun AvatarText(
             modifier = Modifier
                 .size(size)
                 .clip(CircleShape)
-                .background(FNCHTheme.colors.darkenWhite)
+                .background(colorBack)
                 .border(
-                    Dimensions.MediumBorderStroke,
-                    color = FNCHTheme.colors.grey,
+                    Dimensions.SmallBorderStroke,
+                    color = if (state) FNCHTheme.colors.primary else FNCHTheme.colors.grey,
                     shape = CircleShape
                 ),
             contentAlignment = Alignment.Center
         ) {
 
-            if (title != null){
-                Text(
-                    text = title,
-                    style = FNCHTheme.typography.displayLarge,
+            if (painter != null){
+                Image(
+                    painter = painter,
+                    modifier = Modifier.fillMaxSize(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
                 )
+            }else{
+                if (title != null){
+                    Text(
+                        text = title,
+                        style = textStyle,
+                        color = colorText
+                    )
+                }
             }
+
         }
 
         if (!text.isNullOrEmpty()){

@@ -28,7 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
-import com.example.uikit.Avatars.AvatarImg
+import com.example.uikit.Avatars.UniversalAvatar
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -80,8 +80,9 @@ fun ApplicantsCard(
             Row(
                 modifier = Modifier.weight(Dimensions.defaultWeight),
             ) {
-                AvatarImg(
-                    painter,
+                UniversalAvatar(
+                    painter = painter,
+                    state = false,
                     size = Dimensions.HeightButton
                 )
 
