@@ -116,7 +116,7 @@ fun BottomBarShellItem(icon: Painter,text: String, state: Boolean, onClick: (Str
             )
         Text(
             text,
-            style = FNCHTheme.typography.labelMedium,
+            style = FNCHTheme.typography.fieldLabel,
             overflow = TextOverflow.Visible,
             color = color
         )

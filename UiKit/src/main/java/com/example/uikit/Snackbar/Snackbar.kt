@@ -89,7 +89,7 @@ fun Snackbar(
         ){
 
             Text("UNDO",
-                style = FNCHTheme.typography.labelMedium,
+                style = FNCHTheme.typography.fieldLabel,
                 color = FNCHTheme.colors.grey,
                 modifier = Modifier.padding(
                     horizontal = Dimensions.SmallSpacer,

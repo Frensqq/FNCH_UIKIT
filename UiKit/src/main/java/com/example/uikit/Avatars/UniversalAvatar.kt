@@ -30,7 +30,7 @@ fun UniversalAvatar(
     state: Boolean,
     colorText: Color = FNCHTheme.colors.black,
     colorBack: Color = FNCHTheme.colors.darkenWhite,
-    textStyle: TextStyle = FNCHTheme.typography.displayLarge,
+    textStyle: TextStyle = FNCHTheme.typography.screenHeader,
     text: String? = null,
     size: Dp = Dimensions.LargeObjectSize
 ){

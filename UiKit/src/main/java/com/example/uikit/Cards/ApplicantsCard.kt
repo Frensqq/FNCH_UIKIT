@@ -91,7 +91,7 @@ fun ApplicantsCard(
                 Column() {
                     Text(
                         "$name $surname",
-                        style = FNCHTheme.typography.labelMedium,
+                        style = FNCHTheme.typography.fieldLabel,
                         color = FNCHTheme.colors.black
                     )
 
@@ -113,7 +113,7 @@ fun ApplicantsCard(
             ) {
                 Text(state,
                     modifier = Modifier.padding(vertical = Dimensions.ExtraSmallPadding),
-                    style = FNCHTheme.typography.labelMedium,
+                    style = FNCHTheme.typography.fieldLabel,
                     color = FNCHTheme.colors.white
                 )
             }

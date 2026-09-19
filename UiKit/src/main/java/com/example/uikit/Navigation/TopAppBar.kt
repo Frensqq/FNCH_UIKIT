@@ -57,7 +57,7 @@ fun TopAppBar(
             SpacerW(Dimensions.MediumSpacer)
 
             Text(text = title,
-                style = FNCHTheme.typography.displayMedium,
+                style = FNCHTheme.typography.subheader,
                 color = FNCHTheme.colors.black,
                 maxLines = Dimensions.countLine
             )

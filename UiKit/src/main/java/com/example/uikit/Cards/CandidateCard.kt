@@ -82,7 +82,7 @@ fun CandidateCard(
         SpacerH(Dimensions.ExtraMediumPadding)
 
         Text(name,
-            style = FNCHTheme.typography.displayMedium,
+            style = FNCHTheme.typography.subheader,
             color = FNCHTheme.colors.black
         )
 

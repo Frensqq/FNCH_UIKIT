@@ -51,7 +51,7 @@ fun Select(
 
             Text(
                 text = titleText,
-                style = FNCHTheme.typography.labelMedium,
+                style = FNCHTheme.typography.fieldLabel,
                 color = FNCHTheme.colors.secondary
             )
             SpacerH(

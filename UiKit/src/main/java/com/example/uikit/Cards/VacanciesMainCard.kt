@@ -126,7 +126,7 @@ fun VacanciesMainCard(
                     )
                     Text(
                         "$${minCost}k - $${maxCost}k",
-                        style = FNCHTheme.typography.labelMedium,
+                        style = FNCHTheme.typography.fieldLabel,
                         color = FNCHTheme.colors.black
                     )
 

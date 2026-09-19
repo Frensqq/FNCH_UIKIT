@@ -66,7 +66,7 @@ fun ApplicantDetailsCard(
     ) {
 
         Text("$name $surname",
-            style = FNCHTheme.typography.displayLarge,
+            style = FNCHTheme.typography.screenHeader,
             )
         SpacerH(Dimensions.ExtraSmallSpacer)
         Text("$post",

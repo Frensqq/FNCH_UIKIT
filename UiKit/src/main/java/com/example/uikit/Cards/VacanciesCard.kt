@@ -76,7 +76,7 @@ fun VacanciesCard(
                 verticalAlignment = Alignment.CenterVertically
                 ) {
                 Text(post,
-                    style = FNCHTheme.typography.labelMedium,
+                    style = FNCHTheme.typography.fieldLabel,
                     color = FNCHTheme.colors.black,
                     modifier = Modifier.weight(Dimensions.LargeAlpha)
                 )
@@ -91,7 +91,7 @@ fun VacanciesCard(
                 ) {
                     Text(state,
                         modifier = Modifier.padding(vertical = Dimensions.ExtraSmallPadding),
-                        style = FNCHTheme.typography.labelMedium,
+                        style = FNCHTheme.typography.fieldLabel,
                         color = FNCHTheme.colors.secondary
                     )
                 }
