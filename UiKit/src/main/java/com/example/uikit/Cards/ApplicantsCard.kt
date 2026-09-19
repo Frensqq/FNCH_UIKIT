@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import com.example.uikit.Avatars.UniversalAvatar
 import com.example.uikit.Cards.ComponentCards.fnchCard
+import com.example.uikit.Components.IconWithText
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -104,15 +105,9 @@ fun ApplicantsCard(
         )
 
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(R.drawable.place),
-                modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                contentDescription = null,
-                tint = FNCHTheme.colors.secondary
-            )
-            Text(
-                "$place",
-                style = FNCHTheme.typography.bodySmall,
+            IconWithText(
+                iconRes =R.drawable.place,
+                text = place,
                 color = FNCHTheme.colors.secondary
             )
         }
@@ -122,17 +117,11 @@ fun ApplicantsCard(
         )
 
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(R.drawable.phone),
-                modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                contentDescription = null,
-                tint = FNCHTheme.colors.secondary
-            )
-            Text(
-                "$phone",
-                style = FNCHTheme.typography.bodySmall,
+            IconWithText(
+                iconRes =R.drawable.phone,
+                text = phone,
                 color = FNCHTheme.colors.secondary
-            )
+                )
             Icon(
                 painter = painterResource(R.drawable.copy),
                 modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, start = Dimensions.ExtraSmallPadding )

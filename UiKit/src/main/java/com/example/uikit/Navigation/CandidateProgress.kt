@@ -54,6 +54,17 @@ fun CandidateProgress(
     }
 }
 
+
+@Composable
+private fun stepColor(index: Int, step: Int): Color {
+    val colors = FNCHTheme.colors
+    return when {
+        index < step - 1 -> colors.primary
+        index == step - 1 -> colors.secondary
+        else -> colors.grey
+    }
+}
+
 @Composable
 private fun StepIndicator(
     color: Color,
@@ -64,16 +75,6 @@ private fun StepIndicator(
             .clip(CircleShape)
             .background(color)
     )
-}
-
-@Composable
-private fun stepColor(index: Int, step: Int): Color {
-    val colors = FNCHTheme.colors
-    return when {
-        index < step - 1 -> colors.primary
-        index == step - 1 -> colors.secondary
-        else -> colors.grey
-    }
 }
 
 @Preview

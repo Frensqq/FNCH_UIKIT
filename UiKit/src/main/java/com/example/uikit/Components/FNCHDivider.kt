@@ -1,4 +1,4 @@
-package com.example.uikit.Cards.ComponentCards
+package com.example.uikit.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

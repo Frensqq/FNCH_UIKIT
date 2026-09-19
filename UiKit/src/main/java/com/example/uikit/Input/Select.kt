@@ -25,11 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
@@ -42,15 +39,15 @@ fun Select(
     onChange: (String) -> Unit,
     placeholder: String,
     value: String,
-    valueList: List<String> = listOf("Engineering","Testing","Development"),
+    valueList: List<String> = listOf("Engineering", "Testing", "Development"),
     titleText: String? = null,
-){
-    var expandMenu by remember{ mutableStateOf(false) }
-    Column() {
-        if (!titleText.isNullOrEmpty()) {
+) {
+    var expandMenu by remember { mutableStateOf(false) }
 
+    Column {
+        if (!titleText.isNullOrEmpty()) {
             Text(
-                text = titleText,
+                titleText,
                 style = FNCHTheme.typography.fieldLabel,
                 color = FNCHTheme.colors.secondary
             )
@@ -59,98 +56,61 @@ fun Select(
             )
         }
 
-
-        BasicTextField(
-            value = value,
-            onValueChange = {},
-            enabled = false,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimensions.HeightButton)
-                .background(
-                    color = FNCHTheme.colors.darkenWhite,
-                    shape = RoundedCornerShape(Dimensions.SmallRounded)
-                )
-                .border(
-                    border = BorderStroke(
-                        width = Dimensions.SmallBorderStroke,
-                        color = FNCHTheme.colors.grey
-                    ),
-                    shape = RoundedCornerShape(Dimensions.SmallRounded)
-                ),
-
-            singleLine = true,
-            textStyle = FNCHTheme.typography.bodyMedium.copy(
-                color = FNCHTheme.colors.black
-            ),
-            cursorBrush = SolidColor(
-                FNCHTheme.colors.primary
-            ),
-
-            decorationBox = { innerTextField ->
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(
-                            horizontal = Dimensions.ExtraMediumPadding
-                        ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-
-                    Box(
-                        modifier = Modifier.weight(Dimensions.LargeAlpha),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-
-                        if (value.isEmpty()) {
-                            Text(
-                                text = placeholder,
-                                style = FNCHTheme.typography.bodyMedium,
-                                color = FNCHTheme.colors.secondary
-                            )
-                        }
-                        innerTextField()
-                    }
-                    SpacerW(Dimensions.MediumSpacer)
-
-                    Icon(
-                        painter = painterResource(
-                            R.drawable.select
-                        ),
-                        modifier = Modifier.clickable {
-                            expandMenu = true
-                        },
-                        contentDescription = null,
-                        tint = FNCHTheme.colors.secondary
+        Box {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(Dimensions.HeightButton)
+                    .background(
+                        FNCHTheme.colors.darkenWhite,
+                        RoundedCornerShape(
+                            Dimensions.SmallRounded
+                        )
                     )
+                    .border(
+                        Dimensions.SmallBorderStroke,
+                        FNCHTheme.colors.grey,
+                        RoundedCornerShape(
+                            Dimensions.SmallRounded
+                        )
+                    )
+                    .clickable { expandMenu = true }
+                    .padding(
+                        horizontal = Dimensions.ExtraMediumPadding
+                    ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = value.ifEmpty { placeholder },
+                    style = FNCHTheme.typography.bodyMedium,
+                    color = if (value.isEmpty()) FNCHTheme.colors.secondary else FNCHTheme.colors.black,
+                    modifier = Modifier.weight(1f)
+                )
+                Icon(painterResource(
+                    R.drawable.select),
+                    null,
+                    tint = FNCHTheme.colors.secondary
+                )
+            }
 
+            DropdownMenu(expandMenu, onDismissRequest = {
+                expandMenu = false
+            },modifier = Modifier.fillMaxWidth()) {
+                valueList.forEach { item ->
+                    DropdownMenuItem(
+
+                        text = {
+                            Text(item)
+                               },
+                        onClick = {
+                            onChange(item); expandMenu = false
+                        }
+                    )
                 }
             }
-        )
-        DropdownMenu(
-            expandMenu,
-            onDismissRequest = {
-                expandMenu = false
-            },
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            valueList.forEach { item ->
-                DropdownMenuItem(
-                    text = { Text(item) },
-                    onClick = {
-                        onChange(item)
-                        expandMenu = false
-                    }
-                )
-            }
-
         }
     }
-
 }
-
 
 @Preview
 @Composable
