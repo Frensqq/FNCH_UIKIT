@@ -145,8 +145,8 @@ fun testNavBarShell(){
     BottomBarShellItem(
         painterResource(R.drawable.search),
         "Product",
-        state = text == "Product",{
-            text = it
-        }
-    )
+        state = text == "Product"
+    ){
+        text = it
+    }
 }

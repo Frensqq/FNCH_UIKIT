@@ -25,6 +25,8 @@ import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import com.example.uikit.Cards.ComponentCards.FNCHDivider
+import com.example.uikit.Cards.ComponentCards.fnchCard
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -43,30 +45,7 @@ fun VacanciesCard(
     onClick: () -> Unit
 ){
     Column(
-        modifier = Modifier.fillMaxWidth()
-            .dropShadow(
-                shape = RoundedCornerShape(Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.CardBlur,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.LargeBorderStroke)
-                )
-            )
-            .clip(RoundedCornerShape(Dimensions.LargeRounded))
-            .background(FNCHTheme.colors.white)
-            .border(
-                Dimensions.SmallBorderStroke,
-                FNCHTheme.colors.darkenWhite,
-                RoundedCornerShape(Dimensions.LargeRounded)
-
-            )
-            .clickable{
-                onClick()
-            }
-            .padding(Dimensions.ExtraMediumPadding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = Modifier.fnchCard(),
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(Dimensions.ExtraSmallPadding)
@@ -106,15 +85,7 @@ fun VacanciesCard(
 
         SpacerH(Dimensions.ExtraMediumPadding)
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(
-                Dimensions.SmallBorderStroke
-            )
-            .background(
-            FNCHTheme.colors.darkenWhite
-            )
-        )
+        FNCHDivider()
 
         SpacerH(Dimensions.ExtraMediumPadding)
 

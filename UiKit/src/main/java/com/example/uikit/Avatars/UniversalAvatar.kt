@@ -26,7 +26,7 @@ import com.example.uikit.UI.FNCHTheme
 @Composable
 fun UniversalAvatar(
     painter: Painter? = null,
-    title: String? = null,
+    initials: String? = null,
     state: Boolean,
     colorText: Color = FNCHTheme.colors.black,
     colorBack: Color = FNCHTheme.colors.darkenWhite,
@@ -60,9 +60,9 @@ fun UniversalAvatar(
                     contentScale = ContentScale.Crop
                 )
             }else{
-                if (title != null){
+                if (initials != null){
                     Text(
-                        text = title,
+                        text = initials,
                         style = textStyle,
                         color = colorText
                     )

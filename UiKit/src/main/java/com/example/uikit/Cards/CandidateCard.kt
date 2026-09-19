@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import com.example.uikit.Cards.ComponentCards.fnchCard
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -36,22 +37,7 @@ fun CandidateCard(
 ){
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Dimensions.LargeRounded))
-            .dropShadow(
-                shape = RoundedCornerShape(Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.CardBlur,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.LargeBorderStroke)
-                )
-            )
-            .background(FNCHTheme.colors.white)
-            .border(Dimensions.SmallBorderStroke, FNCHTheme.colors.grey,RoundedCornerShape(
-                Dimensions.LargeRounded))
-            .padding(vertical = Dimensions.ExtraMediumPadding),
+        modifier = Modifier.fnchCard(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 

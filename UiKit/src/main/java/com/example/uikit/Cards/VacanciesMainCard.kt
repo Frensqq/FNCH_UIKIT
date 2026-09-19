@@ -27,6 +27,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import com.example.uikit.Avatars.UniversalAvatar
+import com.example.uikit.Cards.ComponentCards.FNCHDivider
+import com.example.uikit.Cards.ComponentCards.fnchCard
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -45,32 +47,14 @@ fun VacanciesMainCard(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Dimensions.LargeRounded))
-            .dropShadow(
-                shape = RoundedCornerShape(Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.CardBlur,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.LargeBorderStroke)
-                )
-            )
-            .background(FNCHTheme.colors.white)
-            .border(
-                Dimensions.SmallBorderStroke, FNCHTheme.colors.grey, RoundedCornerShape(
-                    Dimensions.LargeRounded
-                )
-            )
-            .padding(Dimensions.ExtraMediumPadding),
+        modifier = Modifier.fnchCard(),
     ) {
 
         Row(horizontalArrangement = Arrangement.spacedBy(Dimensions.ExtraMediumPadding)) {
 
             UniversalAvatar(
                 state = false,
-                title = avTitle,
+                initials = avTitle,
                 colorText = FNCHTheme.colors.primary,
                 colorBack = FNCHTheme.colors.grey,
                 textStyle = FNCHTheme.typography.bodyMedium.copy(fontWeight = FontWeight(800)),
@@ -136,15 +120,7 @@ fun VacanciesMainCard(
 
         SpacerH(Dimensions.ExtraMediumPadding)
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(
-                Dimensions.SmallBorderStroke
-            )
-            .background(
-                FNCHTheme.colors.grey
-            )
-        )
+        FNCHDivider(color = FNCHTheme.colors.grey)
 
         SpacerH(Dimensions.ExtraMediumPadding)
 
