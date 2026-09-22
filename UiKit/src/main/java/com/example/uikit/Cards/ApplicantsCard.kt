@@ -28,7 +28,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
-import com.example.uikit.Avatars.AvatarImg
+import com.example.uikit.Avatars.UniversalAvatar
+import com.example.uikit.Cards.ComponentCards.fnchCard
+import com.example.uikit.Components.IconWithText
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -50,28 +52,7 @@ fun ApplicantsCard(
     val clipboardManager = LocalClipboardManager.current
 
     Column(
-        modifier = Modifier.fillMaxWidth()
-            .dropShadow(
-                shape = RoundedCornerShape(Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.CardBlur,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.LargeBorderStroke)
-                )
-            )
-            .clip(RoundedCornerShape(Dimensions.LargeRounded))
-            .background(FNCHTheme.colors.white)
-            .border(
-                Dimensions.SmallBorderStroke,
-                FNCHTheme.colors.darkenWhite,
-                RoundedCornerShape(Dimensions.LargeRounded)
-
-            )
-            .clickable{
-                onClick()
-            }
-            .padding(Dimensions.ExtraMediumPadding),
+        modifier = Modifier.fnchCard(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(modifier = Modifier.fillMaxWidth(),
@@ -80,8 +61,9 @@ fun ApplicantsCard(
             Row(
                 modifier = Modifier.weight(Dimensions.defaultWeight),
             ) {
-                AvatarImg(
-                    painter,
+                UniversalAvatar(
+                    painter = painter,
+                    state = false,
                     size = Dimensions.HeightButton
                 )
 
@@ -90,7 +72,7 @@ fun ApplicantsCard(
                 Column() {
                     Text(
                         "$name $surname",
-                        style = FNCHTheme.typography.labelMedium,
+                        style = FNCHTheme.typography.fieldLabel,
                         color = FNCHTheme.colors.black
                     )
 
@@ -112,7 +94,7 @@ fun ApplicantsCard(
             ) {
                 Text(state,
                     modifier = Modifier.padding(vertical = Dimensions.ExtraSmallPadding),
-                    style = FNCHTheme.typography.labelMedium,
+                    style = FNCHTheme.typography.fieldLabel,
                     color = FNCHTheme.colors.white
                 )
             }
@@ -123,15 +105,9 @@ fun ApplicantsCard(
         )
 
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(R.drawable.place),
-                modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                contentDescription = null,
-                tint = FNCHTheme.colors.secondary
-            )
-            Text(
-                "$place",
-                style = FNCHTheme.typography.bodySmall,
+            IconWithText(
+                iconRes =R.drawable.place,
+                text = place,
                 color = FNCHTheme.colors.secondary
             )
         }
@@ -141,17 +117,11 @@ fun ApplicantsCard(
         )
 
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                painter = painterResource(R.drawable.phone),
-                modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                contentDescription = null,
-                tint = FNCHTheme.colors.secondary
-            )
-            Text(
-                "$phone",
-                style = FNCHTheme.typography.bodySmall,
+            IconWithText(
+                iconRes =R.drawable.phone,
+                text = phone,
                 color = FNCHTheme.colors.secondary
-            )
+                )
             Icon(
                 painter = painterResource(R.drawable.copy),
                 modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, start = Dimensions.ExtraSmallPadding )

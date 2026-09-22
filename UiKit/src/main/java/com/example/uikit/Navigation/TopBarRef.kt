@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.example.uikit.Avatars.AvatarImg
+import com.example.uikit.Avatars.UniversalAvatar
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -87,7 +87,7 @@ fun TopBarRef(
             }
 
             if (painter != null){
-                AvatarImg(painter, size = Dimensions.MediumObjectSize)
+                UniversalAvatar(painter, state = true, size = Dimensions.MediumObjectSize)
             }
             else {
                 if (!state) {

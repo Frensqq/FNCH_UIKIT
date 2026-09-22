@@ -66,7 +66,7 @@ fun InputFields(
 
             Text(
                 text = titleText,
-                style = FNCHTheme.typography.labelMedium,
+                style = FNCHTheme.typography.fieldLabel,
                 color = when {
                     !errorText.isNullOrEmpty() -> FNCHTheme.colors.error
                     isFocused -> FNCHTheme.colors.primary
@@ -190,7 +190,7 @@ fun InputFields(
 
             Text(
                 text = errorText,
-                style = FNCHTheme.typography.labelMedium,
+                style = FNCHTheme.typography.fieldLabel,
                 color = FNCHTheme.colors.error
             )
         }

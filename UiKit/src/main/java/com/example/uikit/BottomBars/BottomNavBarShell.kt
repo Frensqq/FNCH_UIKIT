@@ -29,71 +29,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
+import com.example.uikit.BottomBars.Components.BarSurface
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
 import com.example.uikit.UI.SpacerW
 
 @Composable
-fun BottomNavBarShell(
-    currentState: String,
-    onChangeState: (String) -> Unit
-) {
-
-    Row(
-        modifier = Modifier.fillMaxWidth()
-            .height(Dimensions.BottomBarHeight)
-            .dropShadow(
-                shape = RoundedCornerShape(
-                    topStart = Dimensions.SmallRounded,
-                    topEnd = Dimensions.SmallRounded),
-                shadow = Shadow(
-                    radius = Dimensions.NavBarShadowR,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.NavBarShadowY)
-                )
-            ).clip(RoundedCornerShape(
-                topStart = Dimensions.SmallRounded,
-                topEnd = Dimensions.SmallRounded)
-            )
-            .background(FNCHTheme.colors.white)
-            .border(
-                width = Dimensions.SmallBorderStroke,
-                FNCHTheme.colors.darkenWhite,
-                shape = RoundedCornerShape(
-                    topStart = Dimensions.SmallRounded,
-                    topEnd = Dimensions.SmallRounded)
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-    ) {
-        BottomBarShellItem(
-            painterResource(R.drawable.vacancies),
-            "Vacancies",
-            state = currentState == "Vacancies"
-        ) {item->
-            onChangeState(item)
-        }
+fun BottomNavBarShell(currentState: String, onChangeState: (String) -> Unit) {
+    BarSurface(topRounded = Dimensions.SmallRounded) {
+        BottomBarShellItem(painterResource(R.drawable.vacancies), "Vacancies", currentState == "Vacancies", onChangeState)
         SpacerW(Dimensions.LargeSpacer)
-        BottomBarShellItem(
-            painterResource(R.drawable.candidates),
-            "Candidates",
-            state = currentState == "Candidates"
-        ) {item->
-            onChangeState(item)
-        }
+        BottomBarShellItem(painterResource(R.drawable.candidates), "Candidates", currentState == "Candidates", onChangeState)
         SpacerW(Dimensions.LargeSpacer)
-        BottomBarShellItem(
-            painterResource(R.drawable.settings),
-            "Settings",
-            state = currentState == "Settings"
-        ) {item->
-            onChangeState(item)
-        }
-
+        BottomBarShellItem(painterResource(R.drawable.settings), "Settings", currentState == "Settings", onChangeState)
     }
-
 }
 
 @Composable
@@ -116,7 +66,7 @@ fun BottomBarShellItem(icon: Painter,text: String, state: Boolean, onClick: (Str
             )
         Text(
             text,
-            style = FNCHTheme.typography.labelMedium,
+            style = FNCHTheme.typography.fieldLabel,
             overflow = TextOverflow.Visible,
             color = color
         )
@@ -145,8 +95,8 @@ fun testNavBarShell(){
     BottomBarShellItem(
         painterResource(R.drawable.search),
         "Product",
-        state = text == "Product",{
-            text = it
-        }
-    )
+        state = text == "Product"
+    ){
+        text = it
+    }
 }

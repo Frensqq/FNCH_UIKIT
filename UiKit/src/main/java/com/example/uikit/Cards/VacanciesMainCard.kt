@@ -1,7 +1,5 @@
 package com.example.uikit.Cards
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,23 +7,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.dropShadow
-import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpOffset
+import com.example.uikit.Avatars.UniversalAvatar
+import com.example.uikit.Components.FNCHDivider
+import com.example.uikit.Cards.ComponentCards.fnchCard
+import com.example.uikit.Components.IconWithText
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -44,43 +38,19 @@ fun VacanciesMainCard(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Dimensions.LargeRounded))
-            .dropShadow(
-                shape = RoundedCornerShape(Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.CardBlur,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.LargeBorderStroke)
-                )
-            )
-            .background(FNCHTheme.colors.white)
-            .border(
-                Dimensions.SmallBorderStroke, FNCHTheme.colors.grey, RoundedCornerShape(
-                    Dimensions.LargeRounded
-                )
-            )
-            .padding(Dimensions.ExtraMediumPadding),
+        modifier = Modifier.fnchCard(),
     ) {
 
         Row(horizontalArrangement = Arrangement.spacedBy(Dimensions.ExtraMediumPadding)) {
 
-            Box(
-                Modifier
-                    .size(Dimensions.HeightButton)
-                    .clip(CircleShape)
-                    .background(FNCHTheme.colors.grey),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(avTitle,
-                    style = FNCHTheme.typography.bodyMedium.copy(fontWeight = FontWeight(800)),
-                    modifier = Modifier.padding(Dimensions.MediumSpacer),
-                    color = FNCHTheme.colors.primary
-                    )
-            }
-
+            UniversalAvatar(
+                state = false,
+                initials = avTitle,
+                colorText = FNCHTheme.colors.primary,
+                colorBack = FNCHTheme.colors.grey,
+                textStyle = FNCHTheme.typography.bodyMedium.copy(fontWeight = FontWeight(800)),
+                size = Dimensions.HeightButton
+            )
             Column(
                 verticalArrangement = Arrangement.spacedBy(Dimensions.ExtraSmallPadding)
             ) {
@@ -94,45 +64,27 @@ fun VacanciesMainCard(
 
                 ) {
 
-                    Icon(
-                        painter = painterResource(com.example.uikit.R.drawable.town),
-                        modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                        contentDescription = null,
-                        tint = FNCHTheme.colors.secondary
-                    )
-                    Text(
-                        "$team",
-                        style = FNCHTheme.typography.bodySmall,
+                    IconWithText(
+                        R.drawable.town,
+                        team,
                         color = FNCHTheme.colors.secondary
                     )
 
                     SpacerW(Dimensions.ExtraMediumPadding)
 
-                    Icon(
-                        painter = painterResource(com.example.uikit.R.drawable.clock),
-                        modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                        contentDescription = null,
-                        tint = FNCHTheme.colors.secondary
+                    IconWithText(
+                        R.drawable.clock,
+                        time,
+                        color = FNCHTheme.colors.secondary,
                     )
-                    Text(
-                        "$time",
-                        style = FNCHTheme.typography.bodySmall,
-                        color = FNCHTheme.colors.secondary
-                    )
-
 
                 }
                 Row() {
-                    Icon(
-                        painter = painterResource(com.example.uikit.R.drawable.cash),
-                        modifier = Modifier.padding(top = Dimensions.ExtraSmallPadding, bottom =  Dimensions.ExtraSmallPadding, end = Dimensions.ExtraSmallPadding ),
-                        contentDescription = null,
-                        tint = FNCHTheme.colors.secondary
-                    )
-                    Text(
+
+                    IconWithText(
+                        R.drawable.cash,
                         "$${minCost}k - $${maxCost}k",
-                        style = FNCHTheme.typography.labelMedium,
-                        color = FNCHTheme.colors.black
+                        style = FNCHTheme.typography.fieldLabel
                     )
 
                 }
@@ -141,15 +93,7 @@ fun VacanciesMainCard(
 
         SpacerH(Dimensions.ExtraMediumPadding)
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .height(
-                Dimensions.SmallBorderStroke
-            )
-            .background(
-                FNCHTheme.colors.grey
-            )
-        )
+        FNCHDivider(color = FNCHTheme.colors.grey)
 
         SpacerH(Dimensions.ExtraMediumPadding)
 

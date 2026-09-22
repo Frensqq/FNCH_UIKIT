@@ -5,56 +5,54 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 
 @Composable
 fun FNCHTheme(
+    colors: FNCHColor = defaultFNCHColor,
+    typography: FNCHTypography = defaultFNCHTypography,
     content: @Composable () -> Unit
-){
-    val colors = defaultFNCHColor
-
-    val colorScheme = lightColorScheme(
-        primary = colors.primary,
-        secondary = colors.secondary,
-        tertiary = colors.tertiary,
-        error =  colors.error,
-        background = colors.darkenWhite,
-        onPrimary = colors.white,
-        surface = colors.grey,
-        onSurface = colors.black
-    )
-
-    val typography = defaultFNCHTypography()
-
-    CompositionLocalProvider(
-        LocalFNCHColor provides colors
-    ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = createFNCHTypography(),
-            content = content
+) {
+    val colorScheme = remember(colors) {
+        lightColorScheme(
+            primary = colors.primary,
+            secondary = colors.secondary,
+            tertiary = colors.tertiary,
+            error = colors.error,
+            background = colors.darkenWhite,
+            onPrimary = colors.white,
+            surface = colors.grey,
+            onSurface = colors.black
         )
     }
 
+    val materialTypography = remember(typography) {
+        Typography(
+            displayLarge = typography.screenHeader,
+            displayMedium = typography.subheader,
+            bodyMedium = typography.bodyMedium,
+            bodySmall = typography.bodySmall,
+            labelMedium = typography.fieldLabel,
+            displaySmall = typography.displaySmall
+        )
+    }
 
-}
-
-private fun createFNCHTypography(): Typography {
-    val type = FNCHType
-
-    return Typography(
-        displayLarge = type.ScreenHeader,
-        displayMedium = type.Subheader,
-        bodyMedium = type.BodyMedium,
-        bodySmall = type.BodySmall,
-        labelMedium = type.FieldLabel,
-        displaySmall = type.DisplaySmall
-    )
+    CompositionLocalProvider(
+        LocalFNCHColor provides colors,
+        LocalFNCHTypography provides typography,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = materialTypography,
+            content = content
+        )
+    }
 }
 
 object FNCHTheme {
     val colors: FNCHColor
-        @Composable
-        get() = LocalFNCHColor.current
+        @Composable get() = LocalFNCHColor.current
 
-    val typography = createFNCHTypography()
+    val typography: FNCHTypography
+        @Composable get() = LocalFNCHTypography.current
 }

@@ -20,6 +20,8 @@ object Dimensions {
 
     val LargeSpacer = 45.dp
 
+    val StoryBookSpacer = 109.dp
+
     //Padding
     val ExtraSmallPadding = 4.dp
     val MediumPadding = 14.dp

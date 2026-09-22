@@ -204,7 +204,7 @@ private fun BottomSheetContent(
     Column {
         Text(
             "Select Status",
-            style = FNCHTheme.typography.displayMedium,
+            style = FNCHTheme.typography.subheader,
             modifier = Modifier.padding(horizontal = Dimensions.ExtraLargePadding),
             color = FNCHTheme.colors.black
         )

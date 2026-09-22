@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import com.example.uikit.BottomBars.Components.BarSurface
 import com.example.uikit.R
 import com.example.uikit.UI.Dimensions
 import com.example.uikit.UI.FNCHTheme
@@ -41,52 +42,12 @@ import com.example.uikit.UI.SpacerW
 
 
 @Composable
-fun BottomNavBar(
-    onClickSave: () -> Unit,
-    onClickNext: () -> Unit
-) {
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Dimensions.BottomBarHeight)
-            .dropShadow(
-                shape = RoundedCornerShape(
-                    topStart = Dimensions.LargeRounded,
-                    topEnd = Dimensions.LargeRounded),
-                shadow = Shadow(
-                    radius = Dimensions.NavBarShadowR,
-                    spread = Dimensions.ZeroSize,
-                    color = FNCHTheme.colors.black.copy(alpha = Dimensions.SmallWeight),
-                    offset = DpOffset(x = Dimensions.ZeroSize, y = Dimensions.NavBarShadowY)
-                )
-            ).clip(RoundedCornerShape(
-                topStart = Dimensions.LargeRounded,
-                topEnd = Dimensions.LargeRounded)
-            )
-            .background(FNCHTheme.colors.white)
-            .border(
-                width = Dimensions.SmallBorderStroke,
-                FNCHTheme.colors.darkenWhite,
-                shape = RoundedCornerShape(
-                    topStart = Dimensions.LargeRounded,
-                    topEnd = Dimensions.LargeRounded)
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-    ) {
-
-
-        SaveNavBarItem {
-            onClickSave()
-        }
+fun BottomNavBar(onClickSave: () -> Unit, onClickNext: () -> Unit) {
+    BarSurface(topRounded = Dimensions.LargeRounded) {
+        SaveNavBarItem { onClickSave() }
         SpacerW(Dimensions.SmallSpacer)
-        NextNavBarItem {
-            onClickNext()
-        }
-
+        NextNavBarItem { onClickNext() }
     }
-
 }
 
 

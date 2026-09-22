@@ -28,7 +28,7 @@ import kotlin.random.Random
 fun PrimaryButton(
     onClick: () -> Unit,
     text: String,
-    state: Boolean
+    enabled: Boolean
 ) {
     val primaryColor = FNCHTheme.colors.primary
     val shape = RoundedCornerShape(Dimensions.SmallRounded)
@@ -55,7 +55,7 @@ fun PrimaryButton(
                 onDrawBehind {
                     drawRect(primaryColor)
 
-                    if (!state) {
+                    if (!enabled) {
                         drawPoints(
                             points = noisePoints,
                             pointMode = PointMode.Points,
@@ -75,7 +75,7 @@ fun PrimaryButton(
         contentPadding = PaddingValues(
             vertical = Dimensions.MediumPadding
         ),
-        enabled = state
+        enabled = enabled
     ) {
         Text(
             text = text,
